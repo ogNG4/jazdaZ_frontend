@@ -41,23 +41,19 @@
     "baseUrl": "./src" /* Base directory to resolve non-absolute module names. */,
     // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     "paths": {
-      "assets/*": ["./assets/*"],
-      "businessComponents/*": ["./businessComponents/*"],
-      "pureComponents/*": ["./pureComponents/*"],
-      "hooks/*": ["./hooks/*"],
       "screens/*": ["./screens/*"],
       "redux/*": ["./redux/*"],
-      "services/*": ["./services/*"],
-      "utils/*": ["./utils/*"],
+      // "services/*": ["./services/*"],
+      // "utils/*": ["./utils/*"],
       "navigation/*": ["./navigation/*"],
-      "translations/*": ["./translations/*"],
-      "layouts/*": ["./layouts/*"],
-      "types/*": ["./types/*"],
-      "providers/*": ["./providers/*"],
-      "relationFactories/*": ["./relationFactories/*"],
-      "promotionFactories/*": ["./promotionFactories/*"],
-      "cache/*": ["./cache/*"],
-      "themes/*": ["./themes/*"]
+      // "translations/*": ["./translations/*"],
+      // "layouts/*": ["./layouts/*"],
+      // "types/*": ["./types/*"],
+      // "providers/*": ["./providers/*"],
+      // "relationFactories/*": ["./relationFactories/*"],
+      // "promotionFactories/*": ["./promotionFactories/*"],
+      // "cache/*": ["./cache/*"],
+      // "themes/*": ["./themes/*"]
     },
     // "paths": {
 

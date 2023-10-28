@@ -1,4 +1,5 @@
 import React from 'react';
+import AppNavigation from '../src/navigation/Routes';
 
 import {
   SafeAreaView,
@@ -9,12 +10,13 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import {AppProviders} from './providers/AppProviders';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView>
-      <Text>Siema</Text>
-    </SafeAreaView>
+    <AppProviders>
+      <AppNavigation />
+    </AppProviders>
   );
 }
 
