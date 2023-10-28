@@ -9,7 +9,8 @@ export const asyncStoragePersister = createAsyncStoragePersister({
 export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            cacheTime: 0
+            staleTime: 10000 * 60,
+            // cacheTime: 0,
         },
     },
 })
@@ -17,5 +18,5 @@ export const queryClient = new QueryClient({
 export const clearQueryClient = () => {
     queryClient.clear();
     console.log('queryClient cleared');
-  };
-  
+};
+

@@ -10,7 +10,7 @@ import {clearQueryClient} from 'services/api/query-client';
 const ExampleScreen: React.FC = () => {
   const count = useSelector((state: any) => state.example.count);
   const dispatch = useDispatch();
-  const {data, isLoading, isError} = getPokemonsQuery();
+  const {data} = getPokemonsQuery();
 
   const handleIncrement = () => {
     dispatch(increment());
