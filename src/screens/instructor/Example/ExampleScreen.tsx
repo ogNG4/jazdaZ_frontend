@@ -1,13 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {decrement, increment, reset} from 'redux/slices/example';
-import {IPokemon, getPokemons} from 'services/api/concrete/example.service';
-import {View, Text, Button, YStack} from 'tamagui';
-
+import {Text, Button} from 'tamagui';
 import {useToast} from 'react-native-toast-notifications';
-import {Camera} from 'lucide-react-native';
-import {Plus} from '@tamagui/lucide-icons';
 
 const ExampleScreen: React.FC = () => {
   const count = useSelector((state: any) => state.example.count);
