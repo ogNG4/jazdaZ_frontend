@@ -3,14 +3,15 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {decrement, increment, reset} from 'redux/slices/example';
 import {IPokemon, getPokemons} from 'services/api/concrete/example.service';
-import {View, Text, Button} from 'tamagui';
-import {getPokemonsQuery} from '../queries/getPokemonsQuery';
-import {clearQueryClient} from 'services/api/query-client';
+import {View, Text, Button, YStack} from 'tamagui';
+
+import {useToast} from 'react-native-toast-notifications';
+import {Camera} from 'lucide-react-native';
+import {Plus} from '@tamagui/lucide-icons';
 
 const ExampleScreen: React.FC = () => {
   const count = useSelector((state: any) => state.example.count);
   const dispatch = useDispatch();
-  const {data} = getPokemonsQuery();
 
   const handleIncrement = () => {
     dispatch(increment());
@@ -22,7 +23,11 @@ const ExampleScreen: React.FC = () => {
 
   const handleReset = () => {
     dispatch(reset());
+
+    toast.show('Witam', {type: 'success'});
   };
+
+  const toast = useToast();
 
   return (
     <ScrollView>
@@ -56,13 +61,6 @@ const ExampleScreen: React.FC = () => {
         onPress={handleReset}>
         Reset
       </Button>
-
-      {data &&
-        data.results.map((pokemon: IPokemon) => (
-          <Text alignSelf={'center'} key={pokemon.name}>
-            {pokemon.name}
-          </Text>
-        ))}
     </ScrollView>
   );
 };
