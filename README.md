@@ -1,4 +1,4 @@
-# jazdaz_backend
+# jazdaz_frontend
 
 <b>To repozytorium zewiera jedynie kod frontendu.</b><br>
 
