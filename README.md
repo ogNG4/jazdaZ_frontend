@@ -1,3 +1,21 @@
+# jazdaz_backend
+
+<b>To repozytorium zewiera jedynie kod frontendu.</b><br>
+
+- Backend: https://github.com/szymonpogwizd/jazdaz_backend <br>
+
+- Dokumentacja: https://kkmns.atlassian.net/wiki/spaces/JZ/pages <br>
+ 
+- Jira: https://kkmns.atlassian.net/jira/software/projects/JZ/boards/1/backlog?epics=visible <br>
+
+### Autorzy: 
+- Szymon Pogwizd
+- Marcin Podobiński
+- Nikodem Tyc
+- Krystian Gomółka
+- Kamil Wresiło
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
