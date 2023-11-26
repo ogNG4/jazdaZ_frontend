@@ -54,9 +54,26 @@ const manropeFont = createFont({
   },
 });
 
+const colorPalette = {
+  textPrimary: '#333332',
+  textSecondary: '#9C9C9C',
+  textSecondaryLight: '#E4E4E4',
+  darkPurple: '#4E0189',
+  lightPurple: '#793CA8',
+  mainBg: '#FCFCFC',
+};
+
+const myTokens = {
+  ...tokens,
+  colors: {
+    ...tokens.color,
+    ...colorPalette,
+  },
+};
+
 const config = createTamagui({
   themes,
-  tokens,
+  tokens: myTokens,
   shorthands,
   fonts: {
     body: manropeFont,
