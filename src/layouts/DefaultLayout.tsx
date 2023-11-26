@@ -4,7 +4,7 @@ import {YStack} from 'tamagui';
 const DefaultLayout = ({children}: {children: React.ReactNode}) => {
   const height = Dimensions.get('window').height;
   return (
-    <YStack bg={'#FCFCFC'} h={height} alignItems={'center'}>
+    <YStack bg={'$colors.mainBg'} h={height} alignItems={'center'}>
       {children}
     </YStack>
   );

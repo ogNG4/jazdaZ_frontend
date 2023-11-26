@@ -10,7 +10,7 @@ const LoadingScreen: React.FC = () => {
         <Spinner
           size="large"
           style={{transform: [{scaleX: 1.8}, {scaleY: 1.8}]}}
-          color={'$gray11'}
+          color={'$colors.textSecondary'}
         />
       </YStack>
     </DefaultLayout>
