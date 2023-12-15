@@ -14,14 +14,12 @@ interface IToast {
 
 const CustomToastLayout = ({message, icon}: IToast) => {
   return (
-    <View mb={'$2'} width={width * 0.7} bg={'#27272a'} borderRadius={'$2'} px={'$2'} py={'$3'}>
-      <XStack alignItems="center" space={'$2'}>
-        {icon}
-        <Text color={'white'} fontWeight={'$6'} fontSize={'$7'}>
-          {message}
-        </Text>
-      </XStack>
-    </View>
+    <XStack alignItems="center" space={'$2'}>
+      {icon}
+      <Text color={'white'} fontWeight={'$6'} fontSize={'$7'}>
+        {message}
+      </Text>
+    </XStack>
   );
 };
 

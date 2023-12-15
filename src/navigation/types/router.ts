@@ -8,6 +8,7 @@ export type StudentParamList = {
 };
 export type AuthParamList = {
     Example: undefined;
+    Login: undefined;
 };
 
 export type InstructorRouterParams = StackNavigationProp<InstructorParamList>;
