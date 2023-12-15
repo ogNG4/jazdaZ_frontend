@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {decrement, increment, reset} from 'redux/slices/example';
 import {Text, Button} from 'tamagui';
 import {useToast} from 'react-native-toast-notifications';
+import useToken from 'hooks/useToken';
+import {logout} from 'redux/slices/auth';
+import {decodeToken} from 'utils/token';
 
 const ExampleScreen: React.FC = () => {
   const count = useSelector((state: any) => state.example.count);
   const dispatch = useDispatch();
+  const {removeAccessToken, token} = useToken();
 
   const handleIncrement = () => {
     dispatch(increment());
@@ -17,13 +21,10 @@ const ExampleScreen: React.FC = () => {
     dispatch(decrement());
   };
 
-  const handleReset = () => {
-    dispatch(reset());
-
-    toast.show('Witam', {type: 'success'});
-  };
-
   const toast = useToast();
+
+  const decodedToken = decodeToken(token);
+  console.log('decodedToken', decodedToken.role);
 
   return (
     <ScrollView>
@@ -54,7 +55,10 @@ const ExampleScreen: React.FC = () => {
         w={'50%'}
         alignSelf={'center'}
         my={12}
-        onPress={handleReset}>
+        onPress={() => {
+          removeAccessToken();
+          dispatch(logout());
+        }}>
         Reset
       </Button>
     </ScrollView>

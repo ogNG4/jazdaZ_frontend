@@ -1,5 +1,5 @@
-import React from 'react';
-import {Button, Text} from 'tamagui';
+import React, {memo} from 'react';
+import {Button, Spinner, Text} from 'tamagui';
 import {Activity, LucideIcon} from 'lucide-react-native';
 
 interface ISolidButtonProps {
@@ -9,7 +9,8 @@ interface ISolidButtonProps {
   width?: string;
   color?: string;
   icon?: LucideIcon;
-  onPress: () => void;
+  onPress?: () => void;
+  isLoading?: boolean;
 }
 
 const SolidButton: React.FC<ISolidButtonProps> = ({
@@ -20,19 +21,22 @@ const SolidButton: React.FC<ISolidButtonProps> = ({
   color,
   icon,
   onPress,
+  isLoading,
 }) => {
   return (
     <Button
+      borderRadius={'$2'}
+      disabled={isLoading}
       onPress={onPress}
       bg={bg}
       width={width || '100%'}
       theme="active"
       pressStyle={{bg: pressedBg || '$gray10'}}
       color={color || 'white'}
-      iconAfter={icon}>
-      {label}
+      iconAfter={isLoading ? <Spinner /> : icon}>
+      <Text fontWeight={'400'}>{label}</Text>
     </Button>
   );
 };
 
-export default SolidButton;
+export default memo(SolidButton);
