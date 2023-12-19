@@ -24,7 +24,7 @@ const validationSchema = yup.object().shape({
 
 const LoginForm: React.FC = () => {
   const {mutate, error, isPending, data} = useLoginMutation();
-  const {setAccessToken} = useToken();
+  const {setAccessToken, token} = useToken();
   const toast = useToast();
   const naviagtion = useInstructorNavigation();
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const LoginForm: React.FC = () => {
           dispatch(login());
         },
         onError: () => {
-          toast.show(customToastType.error({message: 'Błędne dane logowania'}));
+          toast.show(customToastType.error({message: error?.response?.data}));
         },
       },
     );
