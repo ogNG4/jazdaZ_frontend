@@ -11,7 +11,7 @@ import {decodeToken} from 'utils/token';
 const ExampleScreen: React.FC = () => {
   const count = useSelector((state: any) => state.example.count);
   const dispatch = useDispatch();
-  const {removeAccessToken, token} = useToken();
+  const {removeAccessToken, token, decodedToken} = useToken();
 
   const handleIncrement = () => {
     dispatch(increment());
@@ -23,8 +23,7 @@ const ExampleScreen: React.FC = () => {
 
   const toast = useToast();
 
-  const decodedToken = decodeToken(token);
-  console.log('decodedToken', decodedToken.role);
+  console.log('decodedToken', decodedToken);
 
   return (
     <ScrollView>

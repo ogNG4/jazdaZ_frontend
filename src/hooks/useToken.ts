@@ -1,6 +1,7 @@
 import {useCallback} from 'react';
 import useAsyncStorage from './useAsyncStorage';
 import {jwtDecode} from 'jwt-decode';
+import { decodeToken } from 'utils/token';
 
 const useToken = () => {
   const [token, setToken, removeToken] = useAsyncStorage('token', '');
@@ -16,7 +17,9 @@ const useToken = () => {
     removeToken();
   }, [removeToken]);
 
-  return {setAccessToken, token, removeAccessToken};
+  const decodedToken = decodeToken(token);
+
+  return {setAccessToken, token, removeAccessToken, decodedToken};
 };
 
 export default useToken;

@@ -4,10 +4,8 @@ import {Text, View, XStack} from 'tamagui';
 import {XCircle, CheckCircle2, AlertCircle} from 'lucide-react-native';
 import {ToastProps} from 'react-native-toast-notifications/lib/typescript/toast';
 
-const width = Dimensions.get('window').width;
-
 interface IToast {
-  message: string | React.ReactElement;
+  message: string | React.ReactElement | undefined | null;
   color?: string;
   icon: React.ReactElement;
 }
