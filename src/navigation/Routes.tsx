@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {InstructorStack} from './InstructorStack';
 import {AuthStack} from './AuthStack';
@@ -9,28 +9,40 @@ import {login, logout} from 'redux/slices/auth';
 import {usePermissions} from 'hooks';
 import {Role} from 'types/role.enum';
 import {StudentStack} from './StudentStack';
+import LoadingScreen from 'screens/LoadingScreen';
 
 const Routes = () => {
   const {token} = useToken();
   const dispatch = useDispatch();
   const isLoggedin = useSelector((state: any) => state.auth.isLogged);
-
   const {hasPermissions: isAdmin} = usePermissions([Role.ADMIN, Role.SUPER_ADMIN], 'OR');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (token) {
-      dispatch(login());
-    } else {
-      dispatch(logout());
-    }
-  }, [token]);
+    const checkLoginStatus = async () => {
+      if (token) {
+        dispatch(login(token));
+      } else {
+        dispatch(logout());
+      }
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 700);
+    };
+
+    checkLoginStatus();
+  }, [token, dispatch]);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <NavigationContainer ref={navigationRef}>
-      {isLoggedin ? (isAdmin ? <InstructorStack /> : <StudentStack />) : <AuthStack />}
+      {isLoggedin ? isAdmin ? <InstructorStack /> : <StudentStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };
 
 export default Routes;
-  

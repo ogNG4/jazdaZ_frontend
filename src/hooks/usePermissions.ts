@@ -1,12 +1,11 @@
 import {Role} from 'types/role.enum';
-import useToken from './useToken';
+import {useSelector} from 'react-redux';
 
 const usePermissions = (permissions: Role[], operator: 'OR' | 'AND') => {
-  const {decodedToken} = useToken();
-  const decodedTokenRole = decodedToken?.role;
+  const userRole = useSelector((state: any) => state.auth.userData.role);
 
-  const hasAllPermissions = permissions.every(p => p === decodedTokenRole);
-  const hasAnyPermission = permissions.some(p => p === decodedTokenRole);
+  const hasAllPermissions = permissions.every(p => p === userRole);
+  const hasAnyPermission = permissions.some(p => p === userRole);
 
   const hasPermissions = operator === 'AND' ? hasAllPermissions : hasAnyPermission;
 

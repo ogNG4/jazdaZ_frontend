@@ -26,7 +26,6 @@ const LoginForm: React.FC = () => {
   const {mutate, error, isPending, data} = useLoginMutation();
   const {setAccessToken, token} = useToken();
   const toast = useToast();
-  const naviagtion = useInstructorNavigation();
   const dispatch = useDispatch();
 
   const handleSubmit = useCallback(({email, password}: FormInput) => {
@@ -36,7 +35,7 @@ const LoginForm: React.FC = () => {
         onSuccess: data => {
           const token = data.headers.authorization.split(' ')[1];
           setAccessToken(token);
-          dispatch(login());
+          dispatch(login(token));
         },
         onError: () => {
           toast.show(customToastType.error({message: error?.response?.data}));
