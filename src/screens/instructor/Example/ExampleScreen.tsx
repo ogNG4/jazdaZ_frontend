@@ -1,29 +1,17 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
-import {decrement, increment, reset} from 'redux/slices/example';
 import {Text, Button} from 'tamagui';
-import {useToast} from 'react-native-toast-notifications';
 import useToken from 'hooks/useToken';
 import {logout} from 'redux/slices/auth';
-import {decodeToken} from 'utils/token';
+import useInstructorNavigation from 'navigation/hooks/useInstructorNavigation';
+import {showToast} from 'utils/toast';
 
 const ExampleScreen: React.FC = () => {
   const count = useSelector((state: any) => state.example.count);
   const dispatch = useDispatch();
   const {removeAccessToken} = useToken();
-
-  const handleIncrement = () => {
-    dispatch(increment());
-  };
-
-  const handleDecrement = () => {
-    dispatch(decrement());
-  };
-
-  const toast = useToast();
-
-
+  const navigation = useInstructorNavigation();
 
   return (
     <ScrollView>
@@ -36,8 +24,8 @@ const ExampleScreen: React.FC = () => {
         w={'50%'}
         alignSelf={'center'}
         marginTop={48}
-        onPress={handleIncrement}>
-        Increment
+        onPress={() => navigation.navigate('CreateUser')}>
+        CreateUSer
       </Button>
       <Button
         bg={'$red10'}
@@ -45,8 +33,8 @@ const ExampleScreen: React.FC = () => {
         w={'50%'}
         alignSelf={'center'}
         marginTop={12}
-        onPress={handleDecrement}>
-        Decrement
+        onPress={() => showToast('info', 'kruwacnka')}>
+        ShowToast
       </Button>
       <Button
         bg={'$blue10'}

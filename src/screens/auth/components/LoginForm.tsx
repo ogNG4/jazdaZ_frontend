@@ -1,16 +1,13 @@
 import {Form} from 'tamagui';
-import SimpleForm from 'components/Form/SimpleForm';
-import InputWithHeader from 'components/Form/InputWithHeader';
+import {SimpleForm, InputWithHeader} from 'components/Form';
 import SolidButton from 'components/Button/SolidButton';
 import * as yup from 'yup';
 import React, {useCallback} from 'react';
 import useLoginMutation from 'hooks/mutations/useLoginMutation';
 import useToken from 'hooks/useToken';
-import {useToast} from 'react-native-toast-notifications';
-import {customToastType} from 'utils/notificator';
-import useInstructorNavigation from 'navigation/hooks/useInstructorNavigation';
 import {login} from 'redux/slices/auth';
 import {useDispatch} from 'react-redux';
+import {showToast} from 'utils/toast';
 
 interface FormInput {
   email: string;
@@ -25,7 +22,6 @@ const validationSchema = yup.object().shape({
 const LoginForm: React.FC = () => {
   const {mutate, error, isPending, data} = useLoginMutation();
   const {setAccessToken, token} = useToken();
-  const toast = useToast();
   const dispatch = useDispatch();
 
   const handleSubmit = useCallback(({email, password}: FormInput) => {
@@ -37,8 +33,8 @@ const LoginForm: React.FC = () => {
           setAccessToken(token);
           dispatch(login(token));
         },
-        onError: () => {
-          toast.show(customToastType.error({message: error?.response?.data}));
+        onError: error => {
+          showToast('error', error?.response?.data as string);
         },
       },
     );
