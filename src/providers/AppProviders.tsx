@@ -3,7 +3,6 @@ import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {Provider} from 'react-redux';
 import {store} from '../redux/store';
 import {asyncStoragePersister, queryClient} from 'services/api/query-client';
-import {AppToastProvider} from './ToastProvider';
 
 export const AppProviders: React.FC<{children: React.ReactNode}> = ({children}) => {
   return (
@@ -11,9 +10,7 @@ export const AppProviders: React.FC<{children: React.ReactNode}> = ({children}) 
       <PersistQueryClientProvider
         client={queryClient}
         persistOptions={{persister: asyncStoragePersister}}>
-        <TamaguiAppProvider>
-          <AppToastProvider>{children}</AppToastProvider>
-        </TamaguiAppProvider>
+        <TamaguiAppProvider>{children}</TamaguiAppProvider>
       </PersistQueryClientProvider>
     </Provider>
   );

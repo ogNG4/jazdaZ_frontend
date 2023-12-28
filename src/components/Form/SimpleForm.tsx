@@ -1,6 +1,6 @@
-import {FieldValues, FormProvider, SubmitHandler, UseFormProps, useForm} from 'react-hook-form';
-import {Button, Form, YStack} from 'tamagui';
-import {PropsWithChildren, memo} from 'react';
+import {FieldValues, FormProvider, UseFormProps, useForm} from 'react-hook-form';
+import {Form, YStack} from 'tamagui';
+import {PropsWithChildren, memo, useEffect} from 'react';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 
@@ -20,7 +20,11 @@ function SimpleForm<T extends FieldValues>({
     resolver: validationSchema ? yupResolver(validationSchema) : undefined,
   });
 
-  const {handleSubmit} = methods;
+  const {handleSubmit, reset} = methods;
+
+  useEffect(() => {
+    reset(defaultValues);
+  }, [defaultValues]);
 
   return (
     <FormProvider {...methods}>
