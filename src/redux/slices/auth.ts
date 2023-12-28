@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, isDraft} from '@reduxjs/toolkit';
 import {IAuthState} from 'redux/types/auth';
 import {decodeToken} from 'utils/token';
 
@@ -8,6 +8,7 @@ export const authSlice = createSlice({
     isLogged: false,
     accessToken: '',
     userData: {
+      id: '',
       firstName: '',
       lastName: '',
       email: '',
@@ -19,16 +20,18 @@ export const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       const decodedToken = decodeToken(action.payload);
+      state.userData.id = decodedToken.user.id;
       state.userData.role = decodedToken.role;
       state.userData.firstName = decodedToken.user.firstName;
       state.userData.lastName = decodedToken.user.lastName;
       state.userData.email = decodedToken.user.email;
-      state.userData.phoneNumber = decodedToken.user.phoneNumber;
+      state.userData.phoneNumber = decodedToken.user.phone;
       state.isLogged = true;
       state.accessToken = action.payload;
     },
     logout: state => {
       state.userData = {
+        id: '',
         firstName: '',
         lastName: '',
         email: '',

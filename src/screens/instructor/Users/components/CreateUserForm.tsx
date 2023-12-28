@@ -6,7 +6,6 @@ import React, {useCallback} from 'react';
 import {showToast} from 'utils/toast';
 import {Role} from 'types/role.enum';
 import {useCreateUserMutation} from 'hooks/mutations';
-import {useForm} from 'react-hook-form';
 import {usePermissions} from 'hooks';
 
 interface FormInput {
@@ -35,7 +34,13 @@ const validationSchema = yup.object().shape({
     .required('Email jest wymagany')
     .email('Email jest niepoprawny')
     .max(50, 'Email może mieć maksymalnie 50 znaków'),
-  password: yup.string().required('Hasło jest wymagane'),
+  password: yup
+    .string()
+    .required('Hasło jest wymagane')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      'Minimum 8 znaków, 1 mała litera, 1 duża litera, 1 cyfra, 1 znak specjalny',
+    ),
   repeatPassword: yup.string().oneOf([yup.ref('password'), null], 'Hasła muszą być takie same'),
   phone: yup
     .string()

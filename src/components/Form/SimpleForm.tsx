@@ -22,9 +22,9 @@ function SimpleForm<T extends FieldValues>({
 
   const {handleSubmit, reset} = methods;
 
-  useEffect(() => {
-    reset(defaultValues);
-  }, [defaultValues]);
+  // useEffect(() => {
+  //   reset(defaultValues);
+  // }, [defaultValues]);
 
   return (
     <FormProvider {...methods}>

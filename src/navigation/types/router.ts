@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 export type InstructorParamList = {
     Example: undefined;
     CreateUser: undefined;
+    Home: undefined;
 };
 export type StudentParamList = {
     Example: undefined;
