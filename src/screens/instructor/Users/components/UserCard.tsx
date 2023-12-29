@@ -7,7 +7,7 @@ import {Role} from 'types/role.enum';
 const UserCard = ({user}: {user: User}) => {
   return (
     <Card
-      onPress={() => console.log('pressed', user)}
+    
       bg={'white'}
       px={'$2'}
       py={'$3'}

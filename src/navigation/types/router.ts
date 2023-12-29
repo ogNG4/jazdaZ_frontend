@@ -1,16 +1,17 @@
-import { StackNavigationProp } from '@react-navigation/stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 export type InstructorParamList = {
-    Example: undefined;
-    CreateUser: undefined;
-    Home: undefined;
+  Example: undefined;
+  CreateUser: undefined;
+  Home: undefined;
+  CreateCategory: undefined;
 };
 export type StudentParamList = {
-    Example: undefined;
+  Example: undefined;
 };
 export type AuthParamList = {
-    Example: undefined;
-    Login: undefined;
+  Example: undefined;
+  Login: undefined;
 };
 
 export type InstructorRouterParams = StackNavigationProp<InstructorParamList>;

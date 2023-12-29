@@ -4,7 +4,8 @@ import UsersScreen from 'screens/instructor/Users/UsersScreen';
 import CoursesScreen from 'screens/instructor/Courses/CoursesScreen';
 import VehiclesScreen from 'screens/instructor/Vehicles/VehiclesScreen';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Button, Text} from 'tamagui';
+import CategoriesScreen from 'screens/instructor/Categories/CategoresScreen';
+import {TopBarButton} from 'components/Button';
 
 interface IRootNavigation {}
 const Tab = createBottomTabNavigator();
@@ -24,6 +25,9 @@ export const InstructorTabs: React.FC<IRootNavigation> = () => {
             case 'Courses':
               iconName = 'book';
               break;
+            case 'Categories':
+              iconName = 'format-list-bulleted';
+              break;
           }
           return <MaterialIcon name={iconName} size={size} color={color} />;
         },
@@ -40,21 +44,22 @@ export const InstructorTabs: React.FC<IRootNavigation> = () => {
         name="Users"
         component={UsersScreen}
         options={({navigation, route}) => ({
-          headerRight: () => (
-            <Button
-              size={'$3'}
-              bg={'$colors.darkPurple'}
-              mr={'$3'}
-              onPress={() => navigation.navigate('CreateUser')}>
-              <Text fontSize={'$4'}>+</Text>
-            </Button>
-          ),
+          headerRight: () => <TopBarButton onPress={() => navigation.navigate('CreateUser')} />,
 
           headerTitle: 'Użytkownicy',
         })}
       />
       <Tab.Screen name="Vehicles" component={VehiclesScreen} />
       <Tab.Screen name="Courses" component={CoursesScreen} />
+      <Tab.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={({navigation, route}) => ({
+          headerRight: () => <TopBarButton onPress={() => navigation.navigate('CreateCategory')} />,
+
+          headerTitle: 'Kategorie',
+        })}
+      />
     </Tab.Navigator>
   );
 };
