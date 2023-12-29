@@ -61,7 +61,7 @@ const CreateUserForm: React.FC = () => {
         {firstName, lastName, userType, email, phone, password},
         {
           onSuccess: () => {
-            queryClient.invalidateQueries([usersQueryKey]);
+            queryClient.invalidateQueries({queryKey: usersQueryKey});
             showToast('success', 'Pomyślnie utworzono użytkownika');
           },
           onError: error => {
@@ -69,10 +69,6 @@ const CreateUserForm: React.FC = () => {
           },
         },
       );
-
-      console.log('firstName', firstName);
-      console.log('lastName', lastName);
-      console.log('userType', userType);
     },
     [],
   );

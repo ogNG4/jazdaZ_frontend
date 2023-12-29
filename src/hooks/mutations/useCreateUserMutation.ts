@@ -11,12 +11,17 @@ export interface CreateUser {
   password: string;
 }
 
-export interface SignInResponse {
-  headers: any;
+export interface CreateUserResponse {
+  id: string;
+  firstName: string;
+  lastName: string;
+  userType: string;
+  email: string;
+  phone: string;
 }
 
 const createUser = async ({firstName, lastName, userType, email, phone, password}: CreateUser) => {
-  const response = await instance.post('users', {
+  const {data} = await instance.post('users', {
     firstName,
     lastName,
     userType,
@@ -25,16 +30,13 @@ const createUser = async ({firstName, lastName, userType, email, phone, password
     password,
   });
 
-  return {
-    data: response.data,
-    headers: response.headers,
-  };
+  return data;
 };
 
 const useCreateUserMutation = (
-  options: UseMutationOptions<SignInResponse, AxiosError, CreateUser> = {},
+  options: UseMutationOptions<CreateUserResponse, AxiosError, CreateUser> = {},
 ) => {
-  return useMutation<SignInResponse, AxiosError, CreateUser>({
+  return useMutation<CreateUserResponse, AxiosError, CreateUser>({
     mutationFn: createUserData => createUser(createUserData),
     ...options,
   });

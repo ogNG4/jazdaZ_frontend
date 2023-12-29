@@ -11,7 +11,7 @@ export interface User {
   phoneNumber: string;
 }
 
-export const usersQueryKey = 'users';
+export const usersQueryKey = ['users'];
 
 const getUsers = async () => {
   const {data} = await instance.get('users');
@@ -20,7 +20,7 @@ const getUsers = async () => {
 
 export default function useUsersQuery() {
   return useQuery<User[], AxiosError>({
-    queryKey: [usersQueryKey],
+    queryKey: usersQueryKey,
     queryFn: getUsers,
   });
 }
