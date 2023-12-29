@@ -1,4 +1,4 @@
-import {Form} from 'tamagui';
+import {Form, ScrollView} from 'tamagui';
 import {SimpleForm, InputWithHeader, SelectWithHeader} from 'components/Form';
 import SolidButton from 'components/Button/SolidButton';
 import * as yup from 'yup';
@@ -7,6 +7,8 @@ import {showToast} from 'utils/toast';
 import {Role} from 'types/role.enum';
 import {useCreateUserMutation} from 'hooks/mutations';
 import {usePermissions} from 'hooks';
+import {useQueryClient} from '@tanstack/react-query';
+import {usersQueryKey} from 'hooks/queries/useUsersQuery';
 
 interface FormInput {
   firstName: string;
@@ -51,13 +53,15 @@ const validationSchema = yup.object().shape({
 const CreateUserForm: React.FC = () => {
   const {mutate, isPending} = useCreateUserMutation();
   const {hasPermissions: isSuperAdmin} = usePermissions([Role.SUPER_ADMIN], 'AND');
+  const queryClient = useQueryClient();
 
   const handleSubmit = useCallback(
     ({firstName, lastName, userType, email, phone, password}: FormInput) => {
       mutate(
         {firstName, lastName, userType, email, phone, password},
         {
-          onSuccess: data => {
+          onSuccess: () => {
+            queryClient.invalidateQueries([usersQueryKey]);
             showToast('success', 'Pomyślnie utworzono użytkownika');
           },
           onError: error => {
@@ -124,7 +128,7 @@ const CreateUserForm: React.FC = () => {
         <SolidButton
           bg={'$colors.darkPurple'}
           pressedBg={'$colors.lightPurple'}
-          label="Zaloguj się"
+          label="Dodaj"
           isLoading={isPending}
         />
       </Form.Trigger>

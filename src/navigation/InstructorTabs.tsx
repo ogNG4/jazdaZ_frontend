@@ -4,6 +4,7 @@ import UsersScreen from 'screens/instructor/Users/UsersScreen';
 import CoursesScreen from 'screens/instructor/Courses/CoursesScreen';
 import VehiclesScreen from 'screens/instructor/Vehicles/VehiclesScreen';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Button, Text} from 'tamagui';
 
 interface IRootNavigation {}
 const Tab = createBottomTabNavigator();
@@ -27,7 +28,7 @@ export const InstructorTabs: React.FC<IRootNavigation> = () => {
           return <MaterialIcon name={iconName} size={size} color={color} />;
         },
 
-        headerShown: false,
+        // headerShown: false,
         tabBarStyle: {
           paddingBottom: 8,
           paddingTop: 8,
@@ -35,7 +36,23 @@ export const InstructorTabs: React.FC<IRootNavigation> = () => {
         },
         tabBarActiveTintColor: '#4E0189',
       })}>
-      <Tab.Screen name="Users" component={UsersScreen} />
+      <Tab.Screen
+        name="Users"
+        component={UsersScreen}
+        options={({navigation, route}) => ({
+          headerRight: () => (
+            <Button
+              size={'$3'}
+              bg={'$colors.darkPurple'}
+              mr={'$3'}
+              onPress={() => navigation.navigate('CreateUser')}>
+              <Text fontSize={'$4'}>+</Text>
+            </Button>
+          ),
+
+          headerTitle: 'Użytkownicy',
+        })}
+      />
       <Tab.Screen name="Vehicles" component={VehiclesScreen} />
       <Tab.Screen name="Courses" component={CoursesScreen} />
     </Tab.Navigator>

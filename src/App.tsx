@@ -4,7 +4,9 @@ import {AppProviders} from './providers/AppProviders';
 import Toast from 'react-native-toast-message';
 import {toastConfig} from 'utils/toast';
 
+
 function App(): JSX.Element {
+
   return (
     <AppProviders>
       <AppNavigation />
