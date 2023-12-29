@@ -10,6 +10,7 @@ import {usePermissions} from 'hooks';
 import {Role} from 'types/role.enum';
 import {StudentStack} from './StudentStack';
 import LoadingScreen from 'screens/LoadingScreen';
+import instance from 'services/api/axios-instance';
 
 const Routes = () => {
   const {token} = useToken();
@@ -22,6 +23,7 @@ const Routes = () => {
     const checkLoginStatus = async () => {
       if (token) {
         dispatch(login(token));
+        instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       } else {
         dispatch(logout());
       }
