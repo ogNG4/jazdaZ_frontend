@@ -3,22 +3,11 @@ import {memo} from 'react';
 import {Avatar, Card, Text, XStack, YStack} from 'tamagui';
 import {Chip} from 'components/Content';
 import {Role} from 'types/role.enum';
+import CardWrapper from 'components/Card/CardWrapper';
 
 const UserCard = ({user}: {user: User}) => {
   return (
-    <Card
-    
-      bg={'white'}
-      px={'$2'}
-      py={'$3'}
-      overflow="hidden"
-      borderWidth={1}
-      borderColor={'$colors.textSecondaryLight'}
-      mb={'$3'}
-      justifyContent="space-between"
-      alignItems="center"
-      flexDirection="row"
-      w={'100%'}>
+    <CardWrapper justifyContent="space-between" alignItems="center" flexDirection="row">
       <XStack alignItems="center" gap={'$2'}>
         <Avatar circular bg={'white'} borderWidth={1} borderColor={'$colors.textSecondary'}>
           <Avatar.Image
@@ -47,7 +36,7 @@ const UserCard = ({user}: {user: User}) => {
         {user.userType === Role.ADMIN && <Chip label={'INSTRUKTOR'} bg={'#4c73d4'} />}
         {user.userType === Role.USER && <Chip label={'STUDENT'} bg={'#1ac97b'} />}
       </XStack>
-    </Card>
+    </CardWrapper>
   );
 };
 

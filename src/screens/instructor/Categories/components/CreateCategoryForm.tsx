@@ -8,11 +8,7 @@ import {Role} from 'types/role.enum';
 import {useCreateCategoryMutation} from 'hooks/mutations';
 import {useQueryClient} from '@tanstack/react-query';
 import {categoriesQueryKey} from 'hooks/queries/useCategoriesQuery';
-
-interface FormInput {
-  drivingLicenceCategory: string;
-  name: string;
-}
+import {CreateCategory} from 'hooks/mutations/useCreateCategoryMutation';
 
 const validationSchema = yup.object().shape({
   drivingLicenceCategory: yup
@@ -31,7 +27,7 @@ const CreateCategoryForm: React.FC = () => {
   const {mutate, isPending} = useCreateCategoryMutation();
   const client = useQueryClient();
 
-  const handleSubmit = useCallback(({drivingLicenceCategory, name}: FormInput) => {
+  const handleSubmit = useCallback(({drivingLicenceCategory, name}: CreateCategory) => {
     mutate(
       {drivingLicenceCategory, name},
       {
