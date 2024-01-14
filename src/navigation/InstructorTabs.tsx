@@ -49,7 +49,15 @@ export const InstructorTabs: React.FC<IRootNavigation> = () => {
           headerTitle: 'Użytkownicy',
         })}
       />
-      <Tab.Screen name="Vehicles" component={VehiclesScreen} />
+      <Tab.Screen
+        name="Vehicles"
+        component={VehiclesScreen}
+        options={({navigation, route}) => ({
+          headerRight: () => <TopBarButton onPress={() => navigation.navigate('CreateVehicle')} />,
+
+          headerTitle: 'Pojazdy',
+        })}
+      />
       <Tab.Screen name="Courses" component={CoursesScreen} />
       <Tab.Screen
         name="Categories"

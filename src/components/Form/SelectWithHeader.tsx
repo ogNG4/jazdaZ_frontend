@@ -31,7 +31,7 @@ function SelectWithHeader({name, placeholder, label, items}: SelectWithHeaderPro
         <RNPickerSelect
           style={pickerSelectStyles}
           value={value}
-          placeholder={{label: 'Wybierz rolę', value: null}}
+          placeholder={{label: placeholder, value: null}}
           onValueChange={onChange}
           items={items}
         />

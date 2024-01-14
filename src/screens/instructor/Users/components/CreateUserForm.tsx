@@ -9,15 +9,7 @@ import {useCreateUserMutation} from 'hooks/mutations';
 import {usePermissions} from 'hooks';
 import {useQueryClient} from '@tanstack/react-query';
 import {usersQueryKey} from 'hooks/queries/useUsersQuery';
-
-interface FormInput {
-  firstName: string;
-  lastName: string;
-  userType: string;
-  email: string;
-  phone: string;
-  password: string;
-}
+import {CreateUser} from 'hooks/mutations/useCreateUserMutation';
 
 const validationSchema = yup.object().shape({
   firstName: yup
@@ -43,7 +35,7 @@ const validationSchema = yup.object().shape({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
       'Minimum 8 znaków, 1 mała litera, 1 duża litera, 1 cyfra, 1 znak specjalny',
     ),
-  repeatPassword: yup.string().oneOf([yup.ref('password'), null], 'Hasła muszą być takie same'),
+  repeatPassword: yup.string().required('Hasło jest wymagane').oneOf([yup.ref('password'), null], 'Hasła muszą być takie same'),
   phone: yup
     .string()
     .required('Numer telefonu jest wymagany')
@@ -56,7 +48,7 @@ const CreateUserForm: React.FC = () => {
   const queryClient = useQueryClient();
 
   const handleSubmit = useCallback(
-    ({firstName, lastName, userType, email, phone, password}: FormInput) => {
+    ({firstName, lastName, userType, email, phone, password}: CreateUser) => {
       mutate(
         {firstName, lastName, userType, email, phone, password},
         {

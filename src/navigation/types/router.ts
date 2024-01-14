@@ -1,10 +1,15 @@
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Vehicle} from 'hooks/queries/useVehiclesQuery';
 
 export type InstructorParamList = {
   Example: undefined;
   CreateUser: undefined;
   Home: undefined;
   CreateCategory: undefined;
+  CreateVehicle: undefined;
+  EditVehicle: {
+    car: Vehicle;
+  };
 };
 export type StudentParamList = {
   Example: undefined;
