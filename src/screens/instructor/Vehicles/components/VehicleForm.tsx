@@ -41,6 +41,8 @@ const VehicleForm = ({onSubmit, vehicle, isLoading}: VehicleFormProps) => {
     courseCategory: vehicle?.courseCategory.id || '',
   };
 
+  console.log('courseCategory', vehicle?.courseCategory)
+
   return (
     <SimpleForm
       validationSchema={validationSchema}

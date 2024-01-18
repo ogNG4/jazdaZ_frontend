@@ -1,13 +1,13 @@
 import {memo} from 'react';
 import {UseControllerProps, useController} from 'react-hook-form';
-import {Input, Text, YStack} from 'tamagui';
+import {Input, InputProps, Text, YStack} from 'tamagui';
 
 interface InputWithHeaderProps extends UseControllerProps {
   label: string;
   placeholder: string;
   type?: string;
 }
-function InputWithHeader({name, placeholder, label, type}: InputWithHeaderProps) {
+function InputWithHeader({name, placeholder, label, type, ...props}: InputWithHeaderProps & InputProps ) {
   const {
     field: {value, onChange},
     fieldState: {error},
@@ -27,6 +27,7 @@ function InputWithHeader({name, placeholder, label, type}: InputWithHeaderProps)
         color={'$colors.textSecondary'}
         borderColor={'$colors.textSecondaryLight'}
         onChangeText={onChange}
+        {...props}
       />
       {error && <Text color={'$red10'}>{error?.message}</Text>}
     </YStack>

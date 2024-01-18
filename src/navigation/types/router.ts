@@ -10,6 +10,8 @@ export type InstructorParamList = {
   EditVehicle: {
     car: Vehicle;
   };
+  CreateCourse: undefined;
+
 };
 export type StudentParamList = {
   Example: undefined;
