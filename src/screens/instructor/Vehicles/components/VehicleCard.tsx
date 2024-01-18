@@ -12,7 +12,6 @@ import {useCategoryQuery} from 'hooks/queries';
 
 const VehicleCard = ({car}: {car: Vehicle}) => {
   const {mutate} = useDeleteVehicleMutation();
-  const {data} = useCategoryQuery({id: car.courseCategory.id});
   const client = useQueryClient();
   const navigation = useInstructorNavigation();
 
@@ -51,7 +50,6 @@ const VehicleCard = ({car}: {car: Vehicle}) => {
           <CardItem label="Rok produkcji" value={car.year.toString()} />
           <CardItem label="Kolor" value={car.color} />
           <CardItem label="Numer rejestracyjny" value={car.registrationNumber} />
-          <CardItem label="Kategoria" value={data?.drivingLicenceCategory || ''} />
         </YStack>
         <YStack justifyContent="space-evenly">
           <Button size={'$3'} variant="outlined" onPress={() => handleDelete(car.id)}>

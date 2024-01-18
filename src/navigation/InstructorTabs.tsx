@@ -58,7 +58,14 @@ export const InstructorTabs: React.FC<IRootNavigation> = () => {
           headerTitle: 'Pojazdy',
         })}
       />
-      <Tab.Screen name="Courses" component={CoursesScreen} />
+      <Tab.Screen
+        name="Courses"
+        component={CoursesScreen}
+        options={({navigation, route}) => ({
+          headerRight: () => <TopBarButton onPress={() => navigation.navigate('CreateCourse')} />,
+          headerTitle: 'Kategorie',
+        })}
+      />
       <Tab.Screen
         name="Categories"
         component={CategoriesScreen}

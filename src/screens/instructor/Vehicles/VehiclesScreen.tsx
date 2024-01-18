@@ -4,8 +4,7 @@ import DefaultLayout from 'layouts/DefaultLayout';
 import React from 'react';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {useDispatch} from 'react-redux';
-import {logout} from 'redux/slices/auth';
-import {Text, Button} from 'tamagui';
+
 import {Vehicle} from '../../../hooks/queries/useVehiclesQuery';
 import VehicleCard from './components/VehicleCard';
 
@@ -17,7 +16,7 @@ const VehiclesScreen: React.FC = () => {
 
   return (
     <DefaultLayout>
-      <Button
+      {/* <Button
         bg={'$blue10'}
         color={'white'}
         w={'50%'}
@@ -28,7 +27,7 @@ const VehiclesScreen: React.FC = () => {
           dispatch(logout());
         }}>
         Logout
-      </Button>
+      </Button> */}
       <FlatList
         style={{
           width: '100%',
