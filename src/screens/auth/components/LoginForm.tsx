@@ -33,7 +33,7 @@ const LoginForm: React.FC = () => {
           const token = data.headers.authorization.split(' ')[1];
           setAccessToken(token);
           dispatch(login(token));
-          // instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  
         },
         onError: error => {
           showToast('error', error?.response?.data as string);

@@ -5,9 +5,12 @@ import ScrollLayout from 'layouts/ScrollLayout';
 import CourseForm from './components/CourseForm';
 import useCreateCourseMutation, {CreateCourse} from 'hooks/mutations/useCreateCourseMutation';
 import {showToast} from 'utils/toast';
+import {useQueryClient} from '@tanstack/react-query';
+import {coursesQueryKey} from 'hooks/queries/useCoursesQuery';
 
 const CreateCourseScreen: React.FC = () => {
   const {mutate, isPending} = useCreateCourseMutation();
+  const client = useQueryClient();
 
   const handleSubmit = ({name, startDate, courseCategory, instructor, student}: CreateCourse) => {
     mutate(
@@ -15,6 +18,7 @@ const CreateCourseScreen: React.FC = () => {
       {
         onSuccess: () => {
           showToast('success', 'Pomyślnie utworzono kurs');
+          client.invalidateQueries(coursesQueryKey);
         },
         onError: error => {
           showToast('error', error?.response?.data as string);

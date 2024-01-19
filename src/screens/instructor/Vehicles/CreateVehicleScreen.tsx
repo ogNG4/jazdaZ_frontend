@@ -20,7 +20,7 @@ const CreateVehicleScreen: React.FC = () => {
         {
           onSuccess: () => {
             queryClient.invalidateQueries({queryKey: vehiclesQueryKey});
-            showToast('success', 'Pomyślnie utworzono użytkownika');
+            showToast('success', 'Pomyślnie utworzono pojazd');
           },
           onError: error => {
             showToast('error', error?.response?.data as string);
