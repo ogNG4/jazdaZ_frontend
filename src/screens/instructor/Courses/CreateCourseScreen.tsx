@@ -1,8 +1,6 @@
 import React from 'react';
-
 import {Stack} from 'tamagui';
 import SectionHeader from 'components/Typography/SectionHeader';
-
 import ScrollLayout from 'layouts/ScrollLayout';
 import CourseForm from './components/CourseForm';
 import useCreateCourseMutation, {CreateCourse} from 'hooks/mutations/useCreateCourseMutation';
@@ -11,9 +9,9 @@ import {showToast} from 'utils/toast';
 const CreateCourseScreen: React.FC = () => {
   const {mutate, isPending} = useCreateCourseMutation();
 
-  const handleSubmit = ({name, status, startDate, courseCategory}: CreateCourse) => {
+  const handleSubmit = ({name, startDate, courseCategory, instructor, student}: CreateCourse) => {
     mutate(
-      {name, status, startDate, courseCategory},
+      {name, startDate, courseCategory, usersIds: [instructor, student]},
       {
         onSuccess: () => {
           showToast('success', 'Pomyślnie utworzono kurs');
@@ -27,7 +25,7 @@ const CreateCourseScreen: React.FC = () => {
   return (
     <ScrollLayout>
       <Stack w={'100%'}>
-        <SectionHeader title="Utwórz konto" subtitle="Dodaj kursanta lub instruktora" mb={'$4'} />
+        <SectionHeader title="Utwórz kurs" subtitle="Utwórz nowy kurs" mb={'$4'} />
         <CourseForm onSubmit={handleSubmit} isLoading={isPending} />
       </Stack>
     </ScrollLayout>

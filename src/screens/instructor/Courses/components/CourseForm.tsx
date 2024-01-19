@@ -3,18 +3,20 @@ import {Button, Form, Stack, Text} from 'tamagui';
 import {SimpleForm, InputWithHeader, SelectWithHeader} from 'components/Form';
 import SolidButton from 'components/Button/SolidButton';
 import * as yup from 'yup';
-import {useCategoriesQuery} from 'hooks/queries';
+import {useCategoriesQuery, useUsersQuery} from 'hooks/queries';
 import {CreateVehicle} from 'hooks/mutations/useCreateVehicleMutation';
 import {EditVehicle} from 'hooks/mutations/useEditVehicleMutation';
 import useCreateCourseMutation from 'hooks/mutations/useCreateCourseMutation';
 import DatePicker from 'react-native-date-picker';
 import {Pressable} from 'react-native';
+import {Role} from 'types/role.enum';
 
 const validationSchema = yup.object().shape({
   name: yup.string().required('Nazwajest wymagana'),
-  status: yup.string().required('Status jest wymagany'),
   startDate: yup.string().required('Data rozpoczęcia jest wymagana'),
   courseCategory: yup.string().required('Kategoria jest wymagana'),
+  instructor: yup.string().required('Instruktor jest wymagany'),
+  student: yup.string().required('Kursant jest wymagany'),
 });
 
 interface CourseFormProps {
@@ -25,9 +27,12 @@ interface CourseFormProps {
 
 const CourseForm = ({onSubmit, isLoading}: CourseFormProps) => {
   const {data} = useCategoriesQuery();
-  const {mutate} = useCreateCourseMutation();
+  const {data: users} = useUsersQuery();
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+
+  const instructors = users?.filter(user => user.userType === Role.ADMIN);
+  const students = users?.filter(user => user.userType === Role.USER);
 
   const defaultValues = {
     name: '',
@@ -38,6 +43,20 @@ const CourseForm = ({onSubmit, isLoading}: CourseFormProps) => {
   const selectItems = data
     ? data?.map(item => ({
         label: item.drivingLicenceCategory,
+        value: item.id,
+      }))
+    : [];
+
+  const selectInstructors = instructors
+    ? instructors?.map(item => ({
+        label: item.firstName + ' ' + item.lastName,
+        value: item.id,
+      }))
+    : [];
+
+  const selectStudents = students
+    ? students?.map(item => ({
+        label: item.firstName + ' ' + item.lastName,
         value: item.id,
       }))
     : [];
@@ -62,7 +81,6 @@ const CourseForm = ({onSubmit, isLoading}: CourseFormProps) => {
         onSubmit={onSubmit}
         defaultValues={defaultValues}>
         <InputWithHeader name="name" placeholder="Podaj nazwę" label="Nazwa" />
-        <InputWithHeader name="status" placeholder="Podaj status" label="Status" />
         <Pressable onPress={() => setOpen(!open)}>
           <Stack pointerEvents="none">
             <InputWithHeader
@@ -77,6 +95,18 @@ const CourseForm = ({onSubmit, isLoading}: CourseFormProps) => {
           name="courseCategory"
           placeholder="Wybierz kategorię"
           items={selectItems}
+        />
+        <SelectWithHeader
+          label={'Instruktor'}
+          name="instructor"
+          placeholder="Wybierz instruktora"
+          items={selectInstructors}
+        />
+        <SelectWithHeader
+          label={'Kursant'}
+          name="student"
+          placeholder="Wybierz kursanta"
+          items={selectStudents}
         />
         <Form.Trigger asChild>
           <SolidButton

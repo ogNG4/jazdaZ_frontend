@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 export const InstructorTabs: React.FC<IRootNavigation> = () => {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({navigation, route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName: string = '';
           switch (route.name) {
@@ -45,7 +45,6 @@ export const InstructorTabs: React.FC<IRootNavigation> = () => {
         component={UsersScreen}
         options={({navigation, route}) => ({
           headerRight: () => <TopBarButton onPress={() => navigation.navigate('CreateUser')} />,
-
           headerTitle: 'Użytkownicy',
         })}
       />
@@ -63,7 +62,7 @@ export const InstructorTabs: React.FC<IRootNavigation> = () => {
         component={CoursesScreen}
         options={({navigation, route}) => ({
           headerRight: () => <TopBarButton onPress={() => navigation.navigate('CreateCourse')} />,
-          headerTitle: 'Kategorie',
+          headerTitle: 'Kursy',
         })}
       />
       <Tab.Screen

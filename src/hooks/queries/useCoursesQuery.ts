@@ -1,11 +1,14 @@
 import {useQuery} from '@tanstack/react-query';
 import {AxiosError} from 'axios';
 import instance from 'services/api/axios-instance';
+import { Category } from './useCategoriesQuery';
 
-export interface Category {
+export interface Course {
   id: string;
-  drivingLicenceCategory: string;
   name: string;
+  status: string;
+  startDate: string;
+  courseCategory: Category;
 }
 
 export const categoriesQueryKey = ['courses'];
@@ -16,7 +19,7 @@ const getCategories = async () => {
 };
 
 export default function useCoursesQuery() {
-  return useQuery<Category[], AxiosError>({
+  return useQuery<Course[], AxiosError>({
     queryKey: categoriesQueryKey,
     queryFn: getCategories,
   });

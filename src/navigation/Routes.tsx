@@ -23,6 +23,7 @@ const Routes = () => {
     const checkLoginStatus = async () => {
       if (token) {
         dispatch(login(token));
+
         instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       } else {
         dispatch(logout());
@@ -30,7 +31,7 @@ const Routes = () => {
 
       setTimeout(() => {
         setIsLoading(false);
-      }, 700);
+      }, 1200);
     };
 
     checkLoginStatus();

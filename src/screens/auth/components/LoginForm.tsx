@@ -8,6 +8,7 @@ import useToken from 'hooks/useToken';
 import {login} from 'redux/slices/auth';
 import {useDispatch} from 'react-redux';
 import {showToast} from 'utils/toast';
+import instance from 'services/api/axios-instance';
 
 interface FormInput {
   email: string;
@@ -32,6 +33,7 @@ const LoginForm: React.FC = () => {
           const token = data.headers.authorization.split(' ')[1];
           setAccessToken(token);
           dispatch(login(token));
+          // instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         },
         onError: error => {
           showToast('error', error?.response?.data as string);
