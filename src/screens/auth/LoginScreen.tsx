@@ -8,7 +8,7 @@ import LoginForm from './components/LoginForm';
 const LoginScreen: React.FC = () => {
   return (
     <AuthLayout>
-      <Stack w={'100%'}   >
+      <Stack w={'100%'}>
         <SectionHeader title="Logowanie" subtitle="Zaloguj się do swojego konta!" mb={'$4'} />
         <LoginForm />
       </Stack>

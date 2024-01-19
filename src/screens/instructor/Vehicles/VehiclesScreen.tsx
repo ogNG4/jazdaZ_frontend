@@ -7,6 +7,8 @@ import {useDispatch} from 'react-redux';
 
 import {Vehicle} from '../../../hooks/queries/useVehiclesQuery';
 import VehicleCard from './components/VehicleCard';
+import { Button } from 'tamagui';
+import { logout } from 'redux/slices/auth';
 
 const VehiclesScreen: React.FC = () => {
   const {removeAccessToken} = useToken();
@@ -16,7 +18,7 @@ const VehiclesScreen: React.FC = () => {
 
   return (
     <DefaultLayout>
-      {/* <Button
+      <Button
         bg={'$blue10'}
         color={'white'}
         w={'50%'}
@@ -27,7 +29,7 @@ const VehiclesScreen: React.FC = () => {
           dispatch(logout());
         }}>
         Logout
-      </Button> */}
+      </Button>
       <FlatList
         style={{
           width: '100%',

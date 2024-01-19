@@ -5,9 +5,11 @@ import instance from 'services/api/axios-instance';
 
 export interface CreateCourse {
   name: string;
-  status: string;
   startDate: string;
   courseCategory: Category;
+  usersIds?: string[];
+  instructor?: string;
+  student?: string;
 }
 
 export interface CreateCourseResponse {
@@ -16,17 +18,13 @@ export interface CreateCourseResponse {
   name: string;
 }
 
-const createCourse = async ({
-  name,
-  status = 'PENDING',
-  startDate,
-  courseCategory,
-}: CreateCourse) => {
+const createCourse = async ({name, startDate, courseCategory, usersIds}: CreateCourse) => {
   const {data} = await instance.post('courses', {
     name,
-    status,
+    status: 'TRWAJĄCY',
     startDate,
     courseCategoryId: courseCategory,
+    usersIds,
   });
 
   return data;
